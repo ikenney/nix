@@ -33,7 +33,7 @@ opt.autoindent = true
 
 -- undo
 opt.undofile = true
--- opt.undodir = '~/.config/home-manager/nvim/.undo'
+opt.undodir = '.undo'
 
 
 
