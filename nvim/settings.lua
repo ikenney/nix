@@ -120,3 +120,26 @@ require('lualine').setup {
     lualine_z = {'location'},
   }
 }
+
+
+-- Comment.nvim
+
+require('Comment').setup {
+}
+
+local comment_api = require "Comment.api"
+local esc = vim.api.nvim_replace_termcodes('<ESC>', true, false, true)
+-- map('v', '<Leader>/', comment_api.call('toggle.linewise', 'g@'), { expr = true })
+map('x', '<leader>/', function()
+  vim.api.nvim_feedkeys(esc, 'nx', false)
+  comment_api.toggle.linewise(vim.fn.visualmode())
+end)
+
+map('x', '<leader>\\', function()
+  vim.api.nvim_feedkeys(esc, 'nx', false)
+  comment_api.toggle.blockwise(vim.fn.visualmode())
+end)
+
+
+
+map('n', '<leader>/', comment_api.toggle.linewise.current)

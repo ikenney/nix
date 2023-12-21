@@ -12,12 +12,19 @@ pkgs:
   plugins = with pkgs.vimPlugins; [
     nvim-web-devicons
     nvim-tree-lua
+
     # syntax / lsp
     nvim-treesitter   
     nvim-lspconfig
+    # mason-lspconfig-nvim
     nvim-cmp
-    #status line
+
+    # comments
+    comment-nvim
+
+    # status line
     lualine-nvim
+
     # theme
     palenight-vim
   ];
