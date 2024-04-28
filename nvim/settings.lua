@@ -3,10 +3,12 @@ local g = vim.g
 local map = vim.keymap.set
 
 -- disable newrw 
+
 g.loaded_netrw = 1 
 g.loaded_netrwPlugin = 1
 
 -- leader
+
 g.mapleader = ' '
 
 -- NvimTree
@@ -15,10 +17,8 @@ local tree_api = require "nvim-tree.api"
 map('n', '<Leader>e', tree_api.tree.toggle)
 
 
--- leader
-g.mapleader = ' '
-
 -- gui
+
 opt.termguicolors = true
 opt.number = true 
 opt.relativenumber = true 
@@ -26,20 +26,23 @@ opt.colorcolumn = '88'
 opt.mouse = 'a'
 vim.cmd("colorscheme palenight")
 
+
 -- tabs etc
+
 opt.tabstop = 2 
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.autoindent = true
 
+
 -- undo
+
 opt.undofile = true
 opt.undodir = '.undo'
 
 
-
-
 -- nvim tree
+
 require('nvim-tree').setup {
     sort_by = "case_sensitive",
     view = {
@@ -53,7 +56,9 @@ require('nvim-tree').setup {
     },
 }
 
+
 -- lsp
+
 local lspconfig = require('lspconfig')
 lspconfig.ruff_lsp.setup {}
 lspconfig.rust_analyzer.setup {}
@@ -92,7 +97,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+
 -- lualine
+
 local function lsp_servers() 
   local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
   if #buf_clients == 0 then
@@ -143,7 +150,7 @@ map('n', '<leader>/', comment_api.toggle.linewise.current)
 
 
 -- toggleterm.nvim
---
+
 require("toggleterm").setup {}
 
 -- "Borrowed" from lvim config
@@ -184,13 +191,3 @@ map({ "n", "t" }, "<M-3>", function()
   term:toggle(1, "float")
 end)
 
---  vim.keymap.set({ "n", "t" }, opts.keymap, function()
---     M._exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction, size = opts.size() }
---   end, { desc = opts.label, noremap = true, silent = true })
--- end
---
--- M._exec_toggle = function(opts)
---   local Terminal = require("toggleterm.terminal").Terminal
---   local term = Terminal:new { cmd = opts.cmd, count = opts.count, direction = opts.direction }
---   term:toggle(opts.size, opts.direction)
--- end
