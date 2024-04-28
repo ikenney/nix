@@ -3,6 +3,7 @@ let
   username = "iank";
   homedir = "/home/${username}";
   neovimConfig = import ./nvim/nvim.nix;
+  gitConfig = import ./git/git.nix;
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -18,7 +19,7 @@ in
   # neovim
   # xdg.configFile."nvim/lua/icons.lua".source = ./nvim/icons.lua;
   programs.neovim = neovimConfig pkgs;
-
+  programs.git = gitConfig pkgs;
 
   programs.zsh = {
     enable = true;
@@ -39,20 +40,6 @@ in
     enable = true;
     settings = {
       add_newline = false;
-    };
-  };
-
-  programs.git = {
-    enable = true;
-    userName  = "Ian Kenney";
-    userEmail = "ian.kenney@louder.com.au";
-    extraConfig = {
-      core = {
-        editor = "nvim";
-      };
-      init = {
-        defaultBranch = "main";
-      };
     };
   };
 
