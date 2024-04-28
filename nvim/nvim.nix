@@ -27,5 +27,8 @@ pkgs:
 
     # theme
     palenight-vim
+
+    # terminal
+    toggleterm-nvim
   ];
 }

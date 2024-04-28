@@ -125,9 +125,7 @@ require('lualine').setup {
 
 -- Comment.nvim
 
-require('Comment').setup {
-}
-
+require('Comment').setup {}
 local comment_api = require "Comment.api"
 local esc = vim.api.nvim_replace_termcodes('<ESC>', true, false, true)
 -- map('v', '<Leader>/', comment_api.call('toggle.linewise', 'g@'), { expr = true })
@@ -141,6 +139,58 @@ map('x', '<leader>\\', function()
   comment_api.toggle.blockwise(vim.fn.visualmode())
 end)
 
-
-
 map('n', '<leader>/', comment_api.toggle.linewise.current)
+
+
+-- toggleterm.nvim
+--
+require("toggleterm").setup {}
+
+-- "Borrowed" from lvim config
+local function get_buf_size()
+  local cbuf = vim.api.nvim_get_current_buf()
+  local bufinfo = vim.tbl_filter(function(buf)
+    return buf.bufnr == cbuf
+  end, vim.fn.getwininfo(vim.api.nvim_get_current_win()))[1]
+  if bufinfo == nil then
+    return { width = -1, height = -1 }
+  end
+  return { width = bufinfo.width, height = bufinfo.height }
+end
+
+local terminal = require("toggleterm.terminal").Terminal
+
+map({ "n", "t" }, "<M-1>", function()
+  local term = terminal:new { 
+    count = 101,
+    direction = "horizontal",
+  }
+  term:toggle(get_buf_size().height * 0.3, "horizontal")
+end)
+
+map({ "n", "t" }, "<M-2>", function()
+  local term = terminal:new { 
+    count = 102,
+    direction = "vertical",
+  }
+  term:toggle(get_buf_size().width * 0.4, "vertical")
+end)
+
+map({ "n", "t" }, "<M-3>", function()
+  local term = terminal:new { 
+    count = 103,
+    direction = "float",
+  }
+  term:toggle(1, "float")
+end)
+
+--  vim.keymap.set({ "n", "t" }, opts.keymap, function()
+--     M._exec_toggle { cmd = opts.cmd, count = opts.count, direction = opts.direction, size = opts.size() }
+--   end, { desc = opts.label, noremap = true, silent = true })
+-- end
+--
+-- M._exec_toggle = function(opts)
+--   local Terminal = require("toggleterm.terminal").Terminal
+--   local term = Terminal:new { cmd = opts.cmd, count = opts.count, direction = opts.direction }
+--   term:toggle(opts.size, opts.direction)
+-- end
