@@ -21,6 +21,7 @@ g.mapleader = ' '
 -- gui
 opt.termguicolors = true
 opt.number = true 
+opt.relativenumber = true 
 opt.colorcolumn = '88'
 opt.mouse = 'a'
 vim.cmd("colorscheme palenight")
