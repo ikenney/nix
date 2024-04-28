@@ -191,3 +191,11 @@ map({ "n", "t" }, "<M-3>", function()
   term:toggle(1, "float")
 end)
 
+map({ "n", "t" }, "<M-4>", function()
+  local term = terminal:new { 
+    count = 104,
+    cmd = "lazygit",
+    direction = "float",
+  }
+  term:toggle(1, "float")
+end)
